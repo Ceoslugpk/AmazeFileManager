@@ -39,7 +39,6 @@ import com.amaze.filemanager.database.models.explorer.EncryptedEntry
 import com.amaze.filemanager.fileoperations.filesystem.OpenMode
 import com.amaze.filemanager.filesystem.HybridFileParcelable
 import com.amaze.filemanager.ui.activities.MainActivity
-import com.amaze.filemanager.ui.dialogs.DecryptFingerprintDialog.show
 import com.amaze.filemanager.ui.dialogs.GeneralDialogCreation
 import com.amaze.filemanager.ui.fragments.MainFragment
 import com.amaze.filemanager.ui.fragments.preferencefragments.PreferencesConstants
@@ -138,29 +137,6 @@ object EncryptDecryptUtils {
             }
 
             when (encryptedEntry!!.password.value) {
-                PreferencesConstants.ENCRYPT_PASSWORD_FINGERPRINT ->
-                    try {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            show(
-                                c,
-                                mainActivity,
-                                decryptIntent,
-                                decryptButtonCallbackInterface,
-                            )
-                        } else {
-                            throw IllegalStateException("API < M!")
-                        }
-                    } catch (e: GeneralSecurityException) {
-                        LOG.warn("failed to form fingerprint dialog", e)
-                        toastDecryptionFailure(main)
-                    } catch (e: IOException) {
-                        LOG.warn("failed to form fingerprint dialog", e)
-                        toastDecryptionFailure(main)
-                    } catch (e: IllegalStateException) {
-                        LOG.warn("failed to form fingerprint dialog", e)
-                        toastDecryptionFailure(main)
-                    }
-
                 PreferencesConstants.ENCRYPT_PASSWORD_MASTER ->
                     try {
                         displayDecryptDialogWithMasterPassword(

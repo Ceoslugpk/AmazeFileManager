@@ -94,12 +94,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = "1.8"
     }
 
     testOptions {
@@ -115,20 +115,6 @@ android {
 
 dependencies {
 
-    modules {
-        module("org.bouncycastle:bcprov-jdk15on") {
-            replacedBy("org.bouncycastle:bcprov-jdk18on")
-        }
-        module("org.bouncycastle:bcpkix-jdk15on") {
-            replacedBy("org.bouncycastle:bcpkix-jdk18on")
-        }
-        module("org.bouncycastle:bcprov-jdk15to18") {
-            replacedBy("org.bouncycastle:bcprov-jdk18on")
-        }
-        module("org.bouncycastle:bcpkix-jdk15to18") {
-            replacedBy("org.bouncycastle:bcpkix-jdk18on")
-        }
-    }
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation libs.systembarTint
@@ -144,7 +130,6 @@ dependencies {
     implementation libs.androidX.cardview
     implementation libs.androidX.constraintLayout
     implementation libs.androidX.multidex //Multiple dex files
-    implementation libs.androidX.biometric
     implementation libs.room.runtime
     implementation libs.room.rxjava2
 
@@ -218,8 +203,8 @@ dependencies {
     //OkHttp
     implementation libs.okhttp
 
-    implementation libs.bcpkix.jdk18on
-    implementation libs.bcprov.jdk18on
+    implementation libs.bcpkix.jdk15on
+    implementation libs.bcprov.jdk15on
 
     //Glide: loads icons seemlessly
     implementation libs.glide
@@ -262,7 +247,7 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(8)
 }
 
 configurations.configureEach {
